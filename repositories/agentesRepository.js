@@ -42,7 +42,7 @@ async function readAll() {
 async function update(id, fieldsToUpdate) {
     try {
         const updated = await db('agentes').where({ id: id }).update(fieldsToUpdate, ["*"]);
-        if (!updated && update.length === 0) {
+        if (!updated && updated.length === 0) {
             return false;
         }
         return updated[0];
