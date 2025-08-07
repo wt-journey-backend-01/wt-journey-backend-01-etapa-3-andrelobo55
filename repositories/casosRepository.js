@@ -3,7 +3,7 @@ const db = require('../db/db');
 async function create(object) {
     try {
         const created = await db('casos').insert(object, ["*"]);
-        if (!created) {
+        if (!created || created.length === 0) {
             return false;
         }
         return created[0];
@@ -45,7 +45,7 @@ async function update(id, fieldsToUpdate) {
         if (updated.length === 0) {
             return false;
         }
-        return update[0];
+        return updated[0];
     } catch (error) {
         console.log(error);
         return false;
