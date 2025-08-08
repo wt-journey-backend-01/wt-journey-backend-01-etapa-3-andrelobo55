@@ -93,7 +93,7 @@ const completeUpdateCaso = async(req, res, next) => {
 
         if (!agente_id) return next(new APIError(400, "Campo 'agente_id' deve ser preenchido"));
 
-        const agenteExists = await agentesRepository.findAgenteById(agente_id);
+        const agenteExists = await agentesRepository.readById(agente_id);
         if (!agenteExists) return next(new APIError(404, "Agente não encontrado"));
 
         const casoAtualizado = await casosRepository.update(id, { titulo, descricao, status, agente_id });
