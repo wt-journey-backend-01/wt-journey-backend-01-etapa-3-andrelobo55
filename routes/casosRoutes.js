@@ -145,7 +145,7 @@ router.put("/:id", casosController.completeUpdateCaso);
  *       200:
  *         description: Caso atualizado com sucesso
  *       400:
- *         description: Requisição inválida (ex: tentativa de alterar o campo 'id' ou 'agente_id')
+ *         description: "Requisição inválida (ex: tentativa de alterar o campo 'id' ou 'agente_id')"
  *       404:
  *         description: Caso não encontrado
  */
