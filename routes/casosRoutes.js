@@ -62,7 +62,7 @@ router.get("/:id", casosController.getCasoById);
  *               status:
  *                 type: string
  *               agente_id:
- *                 type: string
+ *                 type: integer
  *     responses:
  *       201:
  *         description: Caso criado com sucesso
