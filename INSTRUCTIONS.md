@@ -12,8 +12,6 @@ POSTGRES_PASSWORD=sua_senha_postgres
 POSTGRES_DB=policia_db
 ...
 
-Obs.: adicione o .env ao arquivo .gitignore
-
 - Crie um arquivo docker-compose.yml e adicione a configuração:
 ```yml
 services:
