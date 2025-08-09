@@ -2,11 +2,8 @@ const db = require('../db/db');
 
 async function create(object) {
     try {
-        const created = await db('agentes').insert(object, ["*"]);
-        if (!created) {
-            return false;
-        }
-        return created[0];
+        const [created] = await db('agentes').insert(object).returning("*");
+        return created;
     } catch (error) {
         console.log(error);
         return false;
@@ -38,11 +35,8 @@ async function readAll() {
 
 async function update(id, fieldsToUpdate) {
     try {
-        const updated = await db('agentes').where({ id: id }).update(fieldsToUpdate, ["*"]);
-        if (!updated || updated.length === 0) {
-            return false;
-        }
-        return updated[0];
+        const [updated] = await db('agentes').where({ id: id }).update(fieldsToUpdate).returning("*");
+        return updated;
     } catch (error) {
         console.log(error);
         return false;
