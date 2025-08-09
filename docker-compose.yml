@@ -1,5 +1,5 @@
 services:
-  postgres_db:
+  postgres:
     container_name: postgres_policia
     image: postgres:17
     restart: unless-stopped
