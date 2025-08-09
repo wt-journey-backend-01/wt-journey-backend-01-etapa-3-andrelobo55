@@ -5,21 +5,16 @@ async function create(object) {
         const [created] = await db('casos').insert(object).returning("*");
         return created;
     } catch (error) {
-        console.log(error);
-        return false;
+        throw error;
     }
 }
 
 async function readById(id) {
     try {
         const result = await db('casos').where({ id: id });
-        if (result.length === 0) {
-            return false;
-        }
         return result[0];
     } catch (error) {
-        console.log(error);
-        return false;
+        throw error;
     }
 }
 
@@ -28,8 +23,7 @@ async function readAll() {
         const result = await db('casos').select(["*"]);
         return result;
     } catch (error) {
-        console.log(error);
-        return false;
+        throw error;
     }
 }
 
@@ -38,21 +32,16 @@ async function update(id, fieldsToUpdate) {
         const [updated] = await db('casos').where({ id: id }).update(fieldsToUpdate).returning("*");
         return updated;
     } catch (error) {
-        console.log(error);
-        return false;
+        throw error;
     }
 }
 
 async function remove(id) {
     try {
         const deleted = await db('casos').where({ id: id }).del();
-        if (!deleted) {
-            return false;
-        }
         return true;
     } catch (error) {
-        console.log(error);
-        return false;
+        throw error;
     }
 }
 
