@@ -5,8 +5,7 @@ async function create(object) {
         const [created] = await db('agentes').insert(object).returning("*");
         return created;
     } catch (error) {
-        console.log(error);
-        return false;
+        throw error;
     }
 }
 
