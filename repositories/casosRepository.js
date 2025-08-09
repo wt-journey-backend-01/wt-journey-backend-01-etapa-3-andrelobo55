@@ -29,9 +29,6 @@ async function readById(id) {
 async function readAll() {
     try {
         const result = await db('casos').select(["*"]);
-        if (result.length === 0) {
-            return false;
-        }
         return result;
     } catch (error) {
         console.log(error);
