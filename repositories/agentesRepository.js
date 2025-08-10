@@ -11,7 +11,7 @@ async function create(object) {
 
 async function readById(id) {
     try {
-        const result = await db('agentes').where({ id: id });
+        const result = await db('agentes').where({ id });
         return result[0];
     } catch (error) {
         throw error;
@@ -20,7 +20,7 @@ async function readById(id) {
 
 async function readAll() {
     try {
-        const result = await db('agentes').select(["*"]);
+        const result = await db('agentes').select("*");
         return result;
     } catch (error) {
         throw error;
@@ -29,7 +29,10 @@ async function readAll() {
 
 async function update(id, fieldsToUpdate) {
     try {
-        const [updated] = await db('agentes').where({ id: id }).update(fieldsToUpdate).returning("*");
+        const [updated] = await db('agentes')
+            .where({ id })
+            .update(fieldsToUpdate)
+            .returning("*");
         return updated;
     } catch (error) {
         throw error;
@@ -38,11 +41,11 @@ async function update(id, fieldsToUpdate) {
 
 async function remove(id) {
     try {
-        const deleted = await db('agentes').where({ id: id }).del();
-        return true;
+        const deletedCount = await db('agentes').where({ id }).del();
+        return deletedCount; // 0 se não deletou nada
     } catch (error) {
         throw error;
     }
 }
 
-module.exports = { create, readById, readAll, update, remove }
+module.exports = { create, readById, readAll, update, remove };
