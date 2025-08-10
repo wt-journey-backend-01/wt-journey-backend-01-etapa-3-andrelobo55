@@ -2,7 +2,7 @@ const db = require('../db/db');
 
 async function create(object) {
     try {
-        const [created] = await db('agentes').insert(object).returning("*");
+        const [created] = await db('agentes').insert(object).returning('*');
         return created;
     } catch (error) {
         throw error;
