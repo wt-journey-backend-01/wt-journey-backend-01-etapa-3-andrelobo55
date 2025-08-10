@@ -53,7 +53,7 @@ const createAgente = async(req, res, next) => {
 
         const agente = await agentesRepository.create({ nome, dataDeIncorporacao, cargo });
 
-       return res.status(201).json(agente);
+       res.status(201).json(agente);
     }
     catch (error) {
         next(error);
