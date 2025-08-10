@@ -2,7 +2,7 @@ const db = require('../db/db');
 
 async function create(object) {
     try {
-        const created = await db('casos').insert(object).returning("*");
+        const [created] = await db('casos').insert(object).returning("*");
         return created;
     } catch (error) {
         throw error;
@@ -29,7 +29,7 @@ async function readAll() {
 
 async function update(id, fieldsToUpdate) {
     try {
-        const updated = await db('casos').where({ id: id }).update(fieldsToUpdate).returning("*");
+        const [updated] = await db('casos').where({ id: id }).update(fieldsToUpdate).returning("*");
         return updated;
     } catch (error) {
         throw error;
