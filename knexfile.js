@@ -6,31 +6,39 @@
 
 require('dotenv').config();
 
-const common = {
-  client: 'pg',
-  migrations: { directory: './db/migrations' },
-  seeds: { directory: './db/seeds' }
-};
-
 module.exports = {
+
   development: {
-    ...common,
+    client: 'pg',
     connection: {
-      host: process.env.DB_HOST || '127.0.0.1', // Localmente usa localhost
+      host: '127.0.0.1',
       port: 5432,
       user: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-    }
+    },
+    migrations: {
+        directory: './db/migrations',
+      },
+    seeds: {
+        directory: './db/seeds',
+      },
   },
   ci: {
-    ...common,
+    client: 'pg',
     connection: {
-      host: process.env.DB_HOST || 'postgres', // No autograder vai usar 'postgres'
+      host: 'postgres', // Using the service name as the host
       port: 5432,
       user: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-    }
+    },
+    migrations: {
+      directory: './db/migrations',
+    },
+    seeds: {
+      directory: './db/seeds',
+    },
   }
+
 };
