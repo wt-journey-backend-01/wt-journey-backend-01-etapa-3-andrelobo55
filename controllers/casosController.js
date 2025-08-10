@@ -12,7 +12,7 @@ class APIError extends Error {
 const getAllCasos = async(req, res, next) => {
     const casos = await casosRepository.readAll();
 
-    res.status(200).json(casos);
+    return res.status(200).json(casos);
 }
 
 const getCasoById = async(req, res, next) => {
@@ -24,7 +24,7 @@ const getCasoById = async(req, res, next) => {
             return next(new APIError(404, "Caso não encontrado"));
         }
 
-        res.status(200).json(caso);
+        return res.status(200).json(caso);
     } catch (error) {
         next(error);
     }
@@ -58,7 +58,7 @@ const createCaso = async(req, res, next) => {
 
         const caso = await casosRepository.create({ titulo, descricao, status, agente_id });
 
-        res.status(201).json(caso);
+        return res.status(201).json(caso);
     } catch (error) {
         next(error);
     }
@@ -98,7 +98,7 @@ const completeUpdateCaso = async(req, res, next) => {
 
         const casoAtualizado = await casosRepository.update(id, { titulo, descricao, status, agente_id });
 
-        res.status(200).json(casoAtualizado);
+        return res.status(200).json(casoAtualizado);
     } catch (error) {
         next(error);
     }
@@ -137,7 +137,7 @@ const updatePartialCaso = async (req, res, next) => {
 
         const casoAtualizado = await casosRepository.update(id, campos);
 
-        res.status(200).json(casoAtualizado);
+        return res.status(200).json(casoAtualizado);
     } catch (error) {
         next(error);
     }
@@ -154,7 +154,7 @@ const deleteCaso = async (req, res, next) => {
 
         await casosRepository.remove(id);
 
-        res.status(204).send();
+        return res.status(204).send();
     } catch (error) {
         next(error);
     }

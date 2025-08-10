@@ -12,7 +12,7 @@ class APIError extends Error {
 const getAllAgentes = async(req, res, next) => {
     const agentes = await agentesRepository.readAll();
 
-    res.status(200).json(agentes);
+    return res.status(200).json(agentes);
 }
 
 const getAgenteById = async(req, res, next) => {
@@ -24,7 +24,7 @@ const getAgenteById = async(req, res, next) => {
             return next(new APIError(404, "Agente não encontrado."));
         }
 
-        res.status(200).json(agente);
+        return res.status(200).json(agente);
     }
     catch (error) {
         next(error);
@@ -53,7 +53,7 @@ const createAgente = async(req, res, next) => {
 
         const agente = await agentesRepository.create({ nome, dataDeIncorporacao, cargo });
 
-        res.status(201).json(agente);
+       return res.status(201).json(agente);
     }
     catch (error) {
         next(error);
@@ -93,7 +93,7 @@ const completeUpdateAgente = async(req, res, next) => {
 
         const agenteAtualizado = await agentesRepository.update(id, { nome, dataDeIncorporacao, cargo });
 
-        res.status(200).json(agenteAtualizado);
+        return res.status(200).json(agenteAtualizado);
     }
     catch (error) {
         next(error);
@@ -117,7 +117,7 @@ const updateCargoAgente = async(req, res, next) => {
 
         const agenteAtualizado = await agentesRepository.update(id, { cargo });
 
-        res.status(200).json(agenteAtualizado);
+        return res.status(200).json(agenteAtualizado);
     }
     catch (error) {
         next(error);
@@ -135,7 +135,7 @@ const deleteAgente = async(req, res, next) => {
 
         await agentesRepository.remove(id);
 
-        res.status(204).send();
+        return res.status(204).send();
     }
     catch (error) {
         next(error);
