@@ -1,48 +1,28 @@
 const db = require('../db/db');
 
 async function create(object) {
-    try {
-        const [created] = await db('agentes').insert(object).returning('*');
-        return created;
-    } catch (error) {
-        throw error;
-    }
+    const [created] = await db('agentes').insert(object).returning('*');
+    return created;
 }
 
 async function readById(id) {
-    try {
-        const result = await db('agentes').where({ id: id });
-        return result[0];
-    } catch (error) {
-        throw error;
-    }
+    const result = await db('agentes').where({ id: id });
+    return result[0];
 }
 
 async function readAll() {
-    try {
-        const result = await db('agentes').select(["*"]);
-        return result;
-    } catch (error) {
-        throw error;
-    }
+    const result = await db('agentes').select(["*"]);
+    return result;
 }
 
 async function update(id, fieldsToUpdate) {
-    try {
-        const [updated] = await db('agentes').where({ id: id }).update(fieldsToUpdate).returning("*");
-        return updated;
-    } catch (error) {
-        throw error;
-    }
+    const [updated] = await db('agentes').where({ id: id }).update(fieldsToUpdate).returning("*");
+    return updated;
 }
 
 async function remove(id) {
-    try {
-        const deleted = await db('agentes').where({ id: id }).del();
-        return true;
-    } catch (error) {
-        throw error;
-    }
+    const deleted = await db('agentes').where({ id: id }).del();
+    return true;
 }
 
 module.exports = { create, readById, readAll, update, remove }
